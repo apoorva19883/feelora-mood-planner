@@ -18,6 +18,14 @@ export interface WatchlistEntry {
 
 type ReactionMap = Record<number, Record<string, number>>;
 
+export interface WatchProgress {
+  episode: number;
+  positionSec: number;
+  durationSec: number;
+  updatedAt: string;
+}
+export type WatchProgressMap = Record<number, WatchProgress>;
+
 interface AppState {
   mood: string | null;
   setMood: (m: string | null) => void;
@@ -41,6 +49,14 @@ interface AppState {
 
   bingeMode: boolean;
   setBingeMode: (v: boolean) => void;
+
+  watchProgress: WatchProgressMap;
+  saveWatchProgress: (id: number, p: WatchProgress) => void;
+  clearWatchProgress: (id: number) => void;
+
+  likedDramas: number[];
+  toggleLike: (id: number) => boolean;
+  isLiked: (id: number) => boolean;
 }
 
 const Ctx = createContext<AppState | null>(null);
@@ -56,6 +72,36 @@ export const AppStoreProvider = ({ children }: { children: ReactNode }) => {
   const [recentSearches, setRecent] = useLocalStorage<string[]>("feelora.recent", []);
   const [reactions, setReactions] = useLocalStorage<ReactionMap>("feelora.reactions", initialReactions);
   const [bingeMode, setBingeMode] = useLocalStorage<boolean>("feelora.binge", false);
+  const [watchProgress, setWatchProgress] = useLocalStorage<WatchProgressMap>("feelora.progress", {});
+  const [likedDramas, setLiked] = useLocalStorage<number[]>("feelora.liked", []);
+
+  const saveWatchProgress = useCallback(
+    (id: number, p: WatchProgress) =>
+      setWatchProgress((prev) => ({ ...prev, [id]: p })),
+    [setWatchProgress],
+  );
+  const clearWatchProgress = useCallback(
+    (id: number) =>
+      setWatchProgress((prev) => {
+        const next = { ...prev };
+        delete next[id];
+        return next;
+      }),
+    [setWatchProgress],
+  );
+  const isLiked = useCallback((id: number) => likedDramas.includes(id), [likedDramas]);
+  const toggleLike = useCallback(
+    (id: number) => {
+      let liked = false;
+      setLiked((prev) => {
+        if (prev.includes(id)) return prev.filter((x) => x !== id);
+        liked = true;
+        return [...prev, id];
+      });
+      return liked;
+    },
+    [setLiked],
+  );
 
   const isInWatchlist = useCallback(
     (id: number) => watchlist.some((w) => w.dramaId === id),
@@ -164,8 +210,10 @@ export const AppStoreProvider = ({ children }: { children: ReactNode }) => {
       recentSearches, pushRecentSearch,
       reactions, bumpReaction,
       bingeMode, setBingeMode,
+      watchProgress, saveWatchProgress, clearWatchProgress,
+      likedDramas, toggleLike, isLiked,
     }),
-    [mood, watchlist, planner, recentSearches, reactions, bingeMode, setMood, toggleWatchlist, isInWatchlist, setStatus, bumpProgress, addToPlanner, removeFromPlanner, updatePlanner, pushRecentSearch, bumpReaction, setBingeMode],
+    [mood, watchlist, planner, recentSearches, reactions, bingeMode, watchProgress, likedDramas, setMood, toggleWatchlist, isInWatchlist, setStatus, bumpProgress, addToPlanner, removeFromPlanner, updatePlanner, pushRecentSearch, bumpReaction, setBingeMode, saveWatchProgress, clearWatchProgress, toggleLike, isLiked],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
