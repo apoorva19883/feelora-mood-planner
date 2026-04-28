@@ -70,3 +70,19 @@ export const fakeReactions = [
 ];
 
 export const hotTopics = ["#QueenOfTears", "#VincenzoForever", "#TheGloryFinale", "#GoblinReaper", "#CDramaHits", "#JoseonEra"];
+
+const episodeTitlePool: Record<string, string[]> = {
+  default: [
+    "First Encounter", "Unspoken Words", "The Promise", "Shadows of the Past", "Hidden Truths",
+    "Crossing Paths", "A Quiet Storm", "Whispers in the Dark", "Breaking Point", "The Confession",
+    "Letting Go", "Fate's Pull", "Stolen Moments", "The Reckoning", "Heart's Echo",
+    "Crossroads", "Burning Bridges", "Tides Turn", "Final Goodbye", "New Beginnings",
+    "Old Wounds", "The Long Road", "Light Returns", "Bound by Stars", "Until We Meet Again",
+    "Ashes Rise", "Silent Tears", "Storm's Eye", "The Last Letter", "Forever After",
+  ],
+};
+
+export const getEpisodeTitle = (drama: Drama, ep: number): string => {
+  const pool = episodeTitlePool.default;
+  return pool[(ep - 1) % pool.length];
+};

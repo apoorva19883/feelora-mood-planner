@@ -17,7 +17,7 @@ const fakeReacts = [
 export default function DramaDetail() {
   const { id } = useParams();
   const drama = dramas.find((d) => d.id === Number(id));
-  const { isInWatchlist, toggleWatchlist, addToPlanner, planner } = useAppStore();
+  const { isInWatchlist, toggleWatchlist, addToPlanner, planner, watchProgress } = useAppStore();
   const [playing, setPlaying] = useState(false);
 
   const similar = useMemo(() => {
@@ -33,6 +33,12 @@ export default function DramaDetail() {
 
   const inList = isInWatchlist(drama.id);
   const inPlanner = planner.some((p) => p.dramaId === drama.id);
+  const progress = watchProgress[drama.id];
+  const hasResume = !!progress && progress.positionSec > 5 && progress.positionSec < progress.durationSec - 5;
+  const fmt = (s: number) => {
+    s = Math.max(0, Math.floor(s));
+    return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
+  };
 
   return (
     <div className="space-y-10 pb-12">
@@ -64,7 +70,8 @@ export default function DramaDetail() {
 
         <div className="flex flex-wrap gap-3">
           <button onClick={() => setPlaying(true)} className="inline-flex items-center gap-2 rounded-full bg-gradient-purple px-6 py-3 text-sm font-semibold shadow-glow transition-transform hover:scale-105">
-            <Play size={16} className="fill-foreground" /> Watch Now
+            <Play size={16} className="fill-foreground" />
+            {hasResume ? `Resume Ep ${progress!.episode} · ${fmt(progress!.positionSec)}` : "Watch Now"}
           </button>
           <button onClick={() => { const a = toggleWatchlist(drama.id); toast({ title: a ? "Added to watchlist" : "Removed from watchlist", description: drama.title }); }}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-elevated px-6 py-3 text-sm font-medium hover:bg-surface">
@@ -116,7 +123,13 @@ export default function DramaDetail() {
         </section>
       </div>
 
-      <VideoPlayer drama={drama} open={playing} onClose={() => setPlaying(false)} />
+      <VideoPlayer
+        drama={drama}
+        open={playing}
+        onClose={() => setPlaying(false)}
+        initialEpisode={hasResume ? progress!.episode : 1}
+        initialPosition={hasResume ? progress!.positionSec : 0}
+      />
     </div>
   );
 }
