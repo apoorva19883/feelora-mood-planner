@@ -8,35 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Feelora dark theme — only theme. */
+    --background: 240 22% 5%;        /* #0A0A0F */
+    --foreground: 0 0% 100%;          /* #FFFFFF */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --surface: 240 16% 9%;            /* #12121A */
+    --elevated: 240 14% 13%;          /* #1C1C28 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --card: 240 16% 9%;
+    --card-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --popover: 240 14% 13%;
+    --popover-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --primary: 268 30% 51%;           /* #7B5EA7 */
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 268 50% 65%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --gold: 45 87% 60%;               /* #F0C040 */
+    --gold-foreground: 240 22% 5%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --mood-red: 16 81% 54%;           /* #E8572A */
+    --mood-blue: 211 65% 57%;         /* #4A90D9 */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --secondary: 240 14% 13%;
+    --secondary-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --muted: 240 14% 13%;
+    --muted-foreground: 240 11% 56%;  /* #888899 */
 
-    --radius: 0.5rem;
+    --accent: 268 30% 51%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 16% 20%;            /* #2A2A3A */
+    --input: 240 16% 20%;
+    --ring: 268 30% 51%;
+
+    --radius: 0.875rem;
+
+    --gradient-hero: radial-gradient(ellipse at top, hsl(268 40% 25% / 0.6), transparent 70%), linear-gradient(180deg, hsl(240 22% 5%), hsl(240 22% 5%));
+    --gradient-purple: linear-gradient(135deg, hsl(268 30% 51%), hsl(268 50% 65%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 87% 60%), hsl(38 90% 55%));
+    --shadow-glow: 0 20px 60px -10px hsl(268 30% 51% / 0.45);
+    --shadow-card: 0 10px 30px -10px hsl(0 0% 0% / 0.6);
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +73,28 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Feelora is dark-only; mirror :root */
+    --background: 240 22% 5%;
+    --foreground: 0 0% 100%;
+    --surface: 240 16% 9%;
+    --elevated: 240 14% 13%;
+    --card: 240 16% 9%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 14% 13%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 268 30% 51%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 14% 13%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 14% 13%;
+    --muted-foreground: 240 11% 56%;
+    --accent: 268 30% 51%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 16% 20%;
+    --input: 240 16% 20%;
+    --ring: 268 30% 51%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +112,27 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
   }
+
+  html {
+    color-scheme: dark;
+  }
+
+  /* Hide scrollbars on horizontal rails */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
+
+@layer utilities {
+  .bg-surface { background-color: hsl(var(--surface)); }
+  .bg-elevated { background-color: hsl(var(--elevated)); }
+  .text-gold { color: hsl(var(--gold)); }
+  .bg-gold { background-color: hsl(var(--gold)); }
+  .bg-gradient-purple { background-image: var(--gradient-purple); }
+  .bg-gradient-gold { background-image: var(--gradient-gold); }
+  .bg-gradient-hero { background-image: var(--gradient-hero); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  }
