@@ -1,14 +1,16 @@
-import { NavLink, useLocation } from "react-router-dom";
-import { Home, Compass, Sparkles, CalendarDays, Bookmark, Users, Settings } from "lucide-react";
+import { NavLink, useLocation, Link } from "react-router-dom";
+import { Home, Compass, Sparkles, CalendarDays, Bookmark, Users, Settings, User, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const items = [
   { to: "/", label: "Home", icon: Home, end: true },
-  { to: "/tropes", label: "Discover", icon: Compass },
-  { to: "/tropes", label: "Tropes", icon: Sparkles },
+  { to: "/discover", label: "Discover", icon: Compass },
+  { to: "/tropes", label: "Tropes", icon: Sparkles, end: false },
+  { to: "/profile", label: "My Profile", icon: User },
   { to: "/planner", label: "Planner", icon: CalendarDays },
   { to: "/watchlist", label: "Watchlist", icon: Bookmark },
   { to: "/community", label: "Community", icon: Users },
+  { to: "/case-study", label: "Case Study", icon: FileText },
   { to: "/settings", label: "Settings", icon: Settings },
 ];
 
@@ -43,7 +45,7 @@ export const Sidebar = () => {
           );
         })}
       </nav>
-      <div className="m-3 rounded-2xl border border-border bg-elevated p-4">
+      <div className="m-3 mb-6 rounded-2xl border border-border bg-elevated p-4">
         <p className="text-xs text-muted-foreground">Tonight's mood</p>
         <p className="mt-1 text-sm font-medium">Find your perfect drama →</p>
         <NavLink to="/mood" className="mt-3 inline-block text-xs text-primary hover:underline">

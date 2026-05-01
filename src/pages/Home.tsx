@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Play, Plus, Check, Star } from "lucide-react";
-import { dramas, moods } from "@/data/dramas";
+import { Play, Plus, Check, Star, Clock } from "lucide-react";
+import { dramas, moods, getBingeHours } from "@/data/dramas";
 import { useAppStore } from "@/store/AppStore";
 import { DramaRow } from "@/components/DramaRow";
 import { toast } from "@/hooks/use-toast";
@@ -72,7 +72,17 @@ export default function Home() {
               </span>
             ))}
           </div>
+          <div className="mt-3 flex items-center gap-3 text-xs text-muted-foreground">
+            <span className="flex items-center gap-1"><Clock size={12} /> {getBingeHours(hero)}h to binge</span>
+            <span>·</span>
+            <span>{hero.pacing} pacing</span>
+          </div>
           <p className="mt-4 max-w-xl text-sm text-muted-foreground md:text-base">{hero.synopsis}</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {hero.emotionalJourney.map((e) => (
+              <span key={e} className="rounded-full bg-primary/20 px-2 py-0.5 text-[10px]">{e}</span>
+            ))}
+          </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <button
               onClick={() => navigate(`/drama/${hero.id}`)}
@@ -134,6 +144,36 @@ export default function Home() {
       <DramaRow title="🐉 Top C-Dramas" dramas={topC} />
 
       <DramaRow title="✨ Hidden Gems" dramas={[...dramas].sort(() => 0.5 - Math.random()).slice(0, 8)} />
+
+      {/* Emotional Journey Spotlight */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold md:text-xl">💫 Emotional Journeys</h2>
+          <Link to="/discover" className="text-xs text-primary hover:underline">Discover more →</Link>
+        </div>
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {dramas.slice(0, 6).map((d) => (
+            <Link key={d.id} to={`/drama/${d.id}`}
+              className="group rounded-2xl border border-border bg-elevated p-4 transition-all hover:border-primary/50 hover:-translate-y-0.5">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{d.emoji}</span>
+                <div>
+                  <p className="text-sm font-medium group-hover:text-primary transition-colors">{d.title}</p>
+                  <p className="text-[10px] text-muted-foreground">{getBingeHours(d)}h · {d.pacing}</p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-1 overflow-x-auto">
+                {d.emotionalJourney.map((emo, i) => (
+                  <div key={emo} className="flex items-center gap-1 shrink-0">
+                    <span className="rounded-full bg-primary/15 px-2 py-0.5 text-[10px]">{emo}</span>
+                    {i < d.emotionalJourney.length - 1 && <span className="text-[10px] text-muted-foreground">→</span>}
+                  </div>
+                ))}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

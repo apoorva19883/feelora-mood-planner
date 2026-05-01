@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Play, Plus, Check, CalendarPlus, Star, ArrowLeft } from "lucide-react";
-import { dramas } from "@/data/dramas";
+import { Play, Plus, Check, CalendarPlus, Star, ArrowLeft, Clock } from "lucide-react";
+import { dramas, getBingeHours } from "@/data/dramas";
 import { useAppStore } from "@/store/AppStore";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { DramaCard } from "@/components/DramaCard";
@@ -59,6 +59,8 @@ export default function DramaDetail() {
           <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
             <span className="flex items-center gap-1 text-foreground"><Star size={14} className="fill-gold text-gold" /> {drama.rating}</span>
             <span>·</span><span>{drama.year}</span><span>·</span><span>{drama.episodes} episodes</span>
+            <span>·</span><span className="flex items-center gap-1"><Clock size={12} /> {getBingeHours(drama)}h total</span>
+            <span>·</span><span>{drama.pacing} pacing</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {drama.tropes.map((t, i) => (
@@ -84,6 +86,28 @@ export default function DramaDetail() {
         </div>
 
         <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">{drama.synopsis}</p>
+
+        {/* Emotional Journey */}
+        <div className="space-y-3">
+          <h2 className="text-lg font-semibold">💫 Emotional Journey</h2>
+          <div className="flex items-center gap-2 overflow-x-auto pb-2">
+            {drama.emotionalJourney.map((emo, i) => (
+              <div key={emo} className="flex items-center gap-2">
+                <div className="rounded-2xl border border-border bg-elevated px-4 py-2.5 text-center transition-all hover:border-primary/50 hover:-translate-y-0.5">
+                  <p className="text-sm font-medium">{emo}</p>
+                </div>
+                {i < drama.emotionalJourney.length - 1 && (
+                  <span className="text-muted-foreground">→</span>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {drama.moods.map((m) => (
+              <span key={m} className="rounded-full bg-gold/15 px-2 py-0.5 text-[10px] text-gold">{m}</span>
+            ))}
+          </div>
+        </div>
 
         <div className="space-y-3">
           <h2 className="text-lg font-semibold">Cast</h2>
