@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { Drama } from "@/data/dramas";
-import { Star, Bookmark, Check } from "lucide-react";
+import { Drama, getBingeHours } from "@/data/dramas";
+import { Star, Bookmark, Check, Clock } from "lucide-react";
 import { useAppStore } from "@/store/AppStore";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 interface Props {
   drama: Drama;
@@ -14,6 +15,7 @@ interface Props {
 export const DramaCard = ({ drama, size = "md", className }: Props) => {
   const { isInWatchlist, toggleWatchlist } = useAppStore();
   const inList = isInWatchlist(drama.id);
+  const [hovered, setHovered] = useState(false);
 
   const dim = {
     sm: "w-40 h-56",
@@ -24,6 +26,8 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
   return (
     <Link
       to={`/drama/${drama.id}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       className={cn(
         "group relative shrink-0 overflow-hidden rounded-2xl border border-border bg-elevated transition-all hover:-translate-y-1 hover:shadow-glow",
         dim,
@@ -46,7 +50,7 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
           toast({ title: added ? "Added to watchlist" : "Removed from watchlist", description: drama.title });
         }}
         aria-label="Toggle watchlist"
-        className="absolute right-2 bottom-20 grid h-8 w-8 place-items-center rounded-full bg-black/50 text-foreground opacity-0 backdrop-blur transition-opacity hover:bg-primary group-hover:opacity-100"
+        className="absolute right-2 bottom-20 z-10 grid h-8 w-8 place-items-center rounded-full bg-black/50 text-foreground opacity-0 backdrop-blur transition-all hover:bg-primary hover:scale-110 group-hover:opacity-100"
       >
         {inList ? <Check size={14} /> : <Bookmark size={14} />}
       </button>
@@ -66,6 +70,24 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
           ))}
         </div>
       </div>
+      {/* Hover Preview */}
+      {hovered && (
+        <div className="absolute inset-x-0 bottom-0 z-20 rounded-b-2xl border-t border-primary/30 bg-surface/95 p-3 backdrop-blur animate-fade-in">
+          <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+            <Clock size={10} /> {getBingeHours(drama)}h total · {drama.pacing} pacing
+          </div>
+          <div className="mt-1.5 flex flex-wrap gap-1">
+            {drama.emotionalJourney.map((e) => (
+              <span key={e} className="rounded-full bg-primary/15 px-1.5 py-0.5 text-[9px]">{e}</span>
+            ))}
+          </div>
+          <div className="mt-1.5 flex flex-wrap gap-1">
+            {drama.moods.slice(0, 2).map((m) => (
+              <span key={m} className="rounded-full bg-gold/15 px-1.5 py-0.5 text-[9px] text-gold">{m}</span>
+            ))}
+          </div>
+        </div>
+      )}
     </Link>
   );
 };
