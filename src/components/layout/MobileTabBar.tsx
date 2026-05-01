@@ -1,13 +1,13 @@
 import { NavLink, useLocation } from "react-router-dom";
-import { Home, Sparkles, CalendarDays, Bookmark, Users } from "lucide-react";
+import { Home, Compass, CalendarDays, Bookmark, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
   { to: "/", label: "Home", icon: Home, end: true },
-  { to: "/tropes", label: "Tropes", icon: Sparkles },
+  { to: "/discover", label: "Discover", icon: Compass },
   { to: "/planner", label: "Planner", icon: CalendarDays },
   { to: "/watchlist", label: "List", icon: Bookmark },
-  { to: "/community", label: "Fans", icon: Users },
+  { to: "/profile", label: "Profile", icon: User },
 ];
 
 export const MobileTabBar = () => {
