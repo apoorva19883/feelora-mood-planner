@@ -135,4 +135,7 @@ All colors MUST be HSL.
   .bg-gradient-hero { background-image: var(--gradient-hero); }
   .shadow-glow { box-shadow: var(--shadow-glow); }
   .shadow-card { box-shadow: var(--shadow-card); }
+  .bg-mood-red { background-color: hsl(var(--mood-red)); }
+  .bg-mood-blue { background-color: hsl(var(--mood-blue)); }
+  .text-mood-blue { color: hsl(var(--mood-blue)); }
 }
