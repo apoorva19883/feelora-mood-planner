@@ -213,7 +213,7 @@ export const VideoPlayer = ({ drama, open, onClose, initialEpisode = 1, initialP
           <X size={14} /> Back to drama
         </button>
         <div className="flex min-w-0 items-center gap-3 text-center">
-          <span className="text-2xl">{drama.emoji}</span>
+          <img src={drama.image} alt={drama.title} className="h-8 w-8 rounded object-cover" />
           <div className="min-w-0">
             <p className="truncate text-sm font-medium">{drama.title}</p>
             <p className="text-xs text-muted-foreground">Ep {episode}: {getEpisodeTitle(drama, episode)}</p>
@@ -232,9 +232,8 @@ export const VideoPlayer = ({ drama, open, onClose, initialEpisode = 1, initialP
       <div className="flex flex-1 overflow-hidden">
         {/* Stage */}
         <div className="relative flex flex-1 items-center justify-center" onDoubleClick={requestFullscreen}>
-          <div className={cn("absolute inset-6 rounded-3xl bg-gradient-to-br", drama.gradient)} />
+          <img src={drama.image} alt={drama.title} className="absolute inset-6 rounded-3xl object-cover" />
           <div className="absolute inset-6 rounded-3xl bg-gradient-to-t from-black/70 via-transparent" />
-          <div className="relative text-[140px] drop-shadow-[0_8px_40px_rgba(0,0,0,0.6)] md:text-[220px]">{drama.emoji}</div>
 
           {/* Center play tap target */}
           <button onClick={togglePlay} className="absolute inset-0" aria-label="Toggle play" />
