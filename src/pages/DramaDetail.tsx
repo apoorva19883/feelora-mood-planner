@@ -43,9 +43,8 @@ export default function DramaDetail() {
   return (
     <div className="space-y-10 pb-12">
       <section className="relative h-[420px] overflow-hidden md:h-[560px]">
-        <div className={cn("absolute inset-0 bg-gradient-to-br", drama.gradient)} />
+        <img src={drama.image} alt={drama.title} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-        <div className="absolute inset-0 flex items-center justify-center text-[200px] opacity-90 drop-shadow-[0_8px_40px_rgba(0,0,0,0.6)] md:text-[320px]">{drama.emoji}</div>
         <Link to="/" className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-border bg-black/40 px-3 py-1.5 text-xs backdrop-blur hover:bg-black/60 md:left-8 md:top-6"><ArrowLeft size={14} /> Back</Link>
       </section>
 

@@ -74,7 +74,7 @@ export default function Community() {
               {topDiscussed.map((d, i) => (
                 <div key={d.id} className="flex items-center gap-3">
                   <span className="text-xs text-muted-foreground">#{i + 1}</span>
-                  <span className={cn("grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br text-lg", d.gradient)}>{d.emoji}</span>
+                  <img src={d.image} alt={d.title} className="h-9 w-9 rounded-lg object-cover" />
                   <span className="text-sm">{d.title}</span>
                 </div>
               ))}

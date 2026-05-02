@@ -34,8 +34,8 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
         className,
       )}
     >
-      <div className={cn("absolute inset-0 bg-gradient-to-br opacity-90", drama.gradient)} />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+      <img src={drama.image} alt={drama.title} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
       <div className="absolute right-2 top-2 flex items-center gap-1 rounded-full bg-black/50 px-2 py-1 text-[11px] backdrop-blur">
         <Star size={11} className="fill-gold text-gold" />
         <span className="font-medium">{drama.rating}</span>
@@ -54,9 +54,6 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
       >
         {inList ? <Check size={14} /> : <Bookmark size={14} />}
       </button>
-      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-6xl drop-shadow-lg">
-        {drama.emoji}
-      </div>
       <div className="absolute inset-x-0 bottom-0 p-3">
         <h3 className="line-clamp-2 text-sm font-semibold leading-tight">{drama.title}</h3>
         <p className="mt-1 text-[11px] text-muted-foreground">

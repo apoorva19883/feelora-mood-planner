@@ -77,7 +77,7 @@ export default function Watchlist() {
             const pct = (w.watched / d.episodes) * 100;
             return (
               <div key={w.dramaId} className="flex flex-col gap-4 rounded-2xl border border-border bg-elevated p-4 sm:flex-row sm:items-center">
-                <Link to={`/drama/${d.id}`} className={cn("relative grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded-xl bg-gradient-to-br text-4xl", d.gradient)}>{d.emoji}</Link>
+                <Link to={`/drama/${d.id}`} className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl"><img src={d.image} alt={d.title} loading="lazy" className="h-full w-full object-cover" /></Link>
                 <div className="flex-1 space-y-2">
                   <Link to={`/drama/${d.id}`} className="block font-semibold hover:text-primary">{d.title}</Link>
                   <div className="flex flex-wrap gap-1.5">

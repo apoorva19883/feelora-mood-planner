@@ -41,9 +41,7 @@ export default function Home() {
         <div className={cn("absolute inset-0 bg-gradient-to-br", hero.gradient)} />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-transparent" />
-        <div className="absolute right-6 top-1/2 hidden -translate-y-1/2 text-[220px] opacity-90 drop-shadow-[0_8px_40px_rgba(0,0,0,0.6)] md:block">
-          {hero.emoji}
-        </div>
+        <img src={hero.image} alt={hero.title} className="absolute inset-0 h-full w-full object-cover opacity-60" />
         <div className="relative z-10 flex h-full max-w-2xl flex-col justify-end p-6 md:p-10">
           <div className="mb-3 flex items-center gap-2">
             <span className="rounded-full bg-gold/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-gold">
@@ -156,7 +154,7 @@ export default function Home() {
             <Link key={d.id} to={`/drama/${d.id}`}
               className="group rounded-2xl border border-border bg-elevated p-4 transition-all hover:border-primary/50 hover:-translate-y-0.5">
               <div className="flex items-center gap-3">
-                <span className="text-2xl">{d.emoji}</span>
+                <img src={d.image} alt={d.title} loading="lazy" className="h-8 w-8 rounded object-cover" />
                 <div>
                   <p className="text-sm font-medium group-hover:text-primary transition-colors">{d.title}</p>
                   <p className="text-[10px] text-muted-foreground">{getBingeHours(d)}h · {d.pacing}</p>

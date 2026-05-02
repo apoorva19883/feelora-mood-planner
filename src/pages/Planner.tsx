@@ -101,7 +101,7 @@ export default function Planner() {
               const hours = Math.round((remaining * d.episodeLength) / 60);
               return (
                 <div key={p.dramaId} className="flex items-center gap-2 text-sm">
-                  <span>{d.emoji}</span>
+                  <img src={d.image} alt={d.title} className="h-6 w-6 rounded object-cover" />
                   <span className="flex-1">{d.title}</span>
                   <span className="text-xs text-muted-foreground">{hours}h remaining</span>
                 </div>
@@ -128,7 +128,7 @@ export default function Planner() {
             const pct = (p.watched / d.episodes) * 100;
             return (
               <div key={p.dramaId} className="flex flex-col gap-4 rounded-2xl border border-border bg-elevated p-4 sm:flex-row sm:items-center">
-                <div className={cn("relative grid h-20 w-20 shrink-0 place-items-center rounded-xl bg-gradient-to-br text-3xl", d.gradient)}>{d.emoji}</div>
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl"><img src={d.image} alt={d.title} loading="lazy" className="h-full w-full object-cover" /></div>
                 <div className="flex-1 space-y-2">
                   <p className="font-semibold">{d.title}</p>
                   <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
@@ -161,7 +161,7 @@ export default function Planner() {
               {candidates.slice(0, 12).map((d) => (
                 <button key={d.id} onClick={() => { addToPlanner(d.id); setPicking(false); setQ(""); }}
                   className="flex w-full items-center gap-3 rounded-xl border border-border bg-elevated p-2 text-left hover:border-primary">
-                  <span className={cn("grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br text-xl", d.gradient)}>{d.emoji}</span>
+                  <img src={d.image} alt={d.title} className="h-10 w-10 rounded-lg object-cover" />
                   <div className="flex-1"><p className="text-sm font-medium">{d.title}</p><p className="text-xs text-muted-foreground">{d.country} · {d.episodes} eps</p></div>
                 </button>
               ))}
