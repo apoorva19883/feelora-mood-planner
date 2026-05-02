@@ -166,7 +166,7 @@ export default function Discover() {
             {filtered.slice(0, 6).map((d) => (
               <div key={d.id} className="rounded-2xl border border-border bg-surface/50 p-4 transition-all hover:border-primary/50">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl">{d.emoji}</span>
+                  <img src={d.image} alt={d.title} loading="lazy" className="h-8 w-8 rounded object-cover" />
                   <div>
                     <p className="text-sm font-medium">{d.title}</p>
                     <p className="text-[10px] text-muted-foreground">{getBingeHours(d)}h total · {d.pacing} pacing</p>
