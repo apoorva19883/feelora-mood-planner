@@ -18,9 +18,9 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
   const [hovered, setHovered] = useState(false);
 
   const dim = {
-    sm: "w-40 h-56",
-    md: "w-52 h-72",
-    lg: "w-full h-80",
+    sm: "w-[160px] min-w-[160px] h-[224px]",
+    md: "w-[208px] min-w-[208px] h-[288px]",
+    lg: "w-full h-[320px]",
   }[size];
 
   return (
@@ -29,18 +29,18 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={cn(
-        "group relative shrink-0 overflow-hidden rounded-2xl border border-border bg-elevated transition-all hover:-translate-y-1 hover:shadow-glow",
+        "group relative flex-shrink-0 overflow-hidden rounded-2xl border border-border bg-elevated transition-all hover:-translate-y-1 hover:shadow-glow",
         dim,
         className,
       )}
     >
       <img src={drama.image} alt={drama.title} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-      <div className="absolute right-2 top-2 flex items-center gap-1 rounded-full bg-black/50 px-2 py-1 text-[11px] backdrop-blur">
+      <div className="absolute right-2 top-2 z-10 flex items-center gap-1 rounded-full bg-black/50 px-2 py-1 text-[11px] backdrop-blur">
         <Star size={11} className="fill-gold text-gold" />
         <span className="font-medium">{drama.rating}</span>
       </div>
-      <div className="absolute left-2 top-2 rounded-full bg-black/50 px-2 py-1 text-[10px] uppercase tracking-wide backdrop-blur">
+      <div className="absolute left-2 top-2 z-10 rounded-full bg-black/50 px-2 py-1 text-[10px] uppercase tracking-wide backdrop-blur">
         {drama.country}
       </div>
       <button
@@ -55,13 +55,13 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
         {inList ? <Check size={14} /> : <Bookmark size={14} />}
       </button>
       <div className="absolute inset-x-0 bottom-0 p-3">
-        <h3 className="line-clamp-2 text-sm font-semibold leading-tight">{drama.title}</h3>
-        <p className="mt-1 text-[11px] text-muted-foreground">
+        <h3 className="line-clamp-2 text-sm font-semibold leading-tight overflow-hidden">{drama.title}</h3>
+        <p className="mt-1 text-[11px] text-muted-foreground truncate">
           {drama.year} · {drama.episodes} eps
         </p>
-        <div className="mt-1.5 flex flex-wrap gap-1">
+        <div className="mt-1.5 flex flex-wrap gap-1 overflow-hidden max-h-[36px]">
           {drama.tropes.slice(0, 2).map((t) => (
-            <span key={t} className="rounded-full bg-primary/20 px-1.5 py-0.5 text-[10px] text-foreground/90">
+            <span key={t} className="rounded-full bg-primary/20 px-1.5 py-0.5 text-[10px] text-foreground/90 truncate max-w-[90px]">
               {t}
             </span>
           ))}
@@ -69,16 +69,16 @@ export const DramaCard = ({ drama, size = "md", className }: Props) => {
       </div>
       {/* Hover Preview */}
       {hovered && (
-        <div className="absolute inset-x-0 bottom-0 z-20 rounded-b-2xl border-t border-primary/30 bg-surface/95 p-3 backdrop-blur animate-fade-in">
-          <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
+        <div className="absolute inset-x-0 bottom-0 z-20 rounded-b-2xl border-t border-primary/30 bg-surface/95 p-3 backdrop-blur animate-fade-in overflow-hidden">
+          <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground truncate">
             <Clock size={10} /> {getBingeHours(drama)}h total · {drama.pacing} pacing
           </div>
-          <div className="mt-1.5 flex flex-wrap gap-1">
+          <div className="mt-1.5 flex flex-wrap gap-1 overflow-hidden max-h-[32px]">
             {drama.emotionalJourney.map((e) => (
               <span key={e} className="rounded-full bg-primary/15 px-1.5 py-0.5 text-[9px]">{e}</span>
             ))}
           </div>
-          <div className="mt-1.5 flex flex-wrap gap-1">
+          <div className="mt-1.5 flex flex-wrap gap-1 overflow-hidden max-h-[20px]">
             {drama.moods.slice(0, 2).map((m) => (
               <span key={m} className="rounded-full bg-gold/15 px-1.5 py-0.5 text-[9px] text-gold">{m}</span>
             ))}
