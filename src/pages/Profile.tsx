@@ -79,7 +79,7 @@ export default function Profile() {
   const hasData = moodProfile.interactedCount > 0;
 
   return (
-    <div className="space-y-8 px-4 pt-6 md:px-8 md:pt-8">
+    <div className="space-y-8 px-6 pt-6 md:px-6 md:pt-8">
       <PageHeader title="Your Drama Mood Profile" subtitle="Your emotional fingerprint based on what you watch" />
 
       {/* Profile Hero */}
@@ -105,8 +105,11 @@ export default function Profile() {
         <>
           {/* Mood breakdown */}
           <section className="space-y-4">
-            <h2 className="text-lg font-semibold">🎭 Your Mood Spectrum</h2>
-            <div className="grid gap-3 md:grid-cols-3">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">🎭 Your Mood Spectrum</h2>
+              <Link to="/discover" className="text-xs font-medium text-primary hover:underline">View all →</Link>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
               {moodProfile.topMoods.map(([moodId, score], i) => {
                 const m = moods.find((x) => x.id === moodId);
                 const pct = moodProfile.total > 0 ? Math.round((score / moodProfile.total) * 100) : 0;
@@ -131,7 +134,10 @@ export default function Profile() {
 
           {/* Emotional map */}
           <section className="space-y-4">
-            <h2 className="text-lg font-semibold">💫 Emotions You're Drawn To</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">💫 Emotions You're Drawn To</h2>
+              <Link to="/discover" className="text-xs font-medium text-primary hover:underline">View all →</Link>
+            </div>
             <div className="flex flex-wrap gap-2">
               {moodProfile.topEmotions.map(([emotion, score], i) => (
                 <div key={emotion} className={cn(
@@ -148,7 +154,10 @@ export default function Profile() {
 
           {/* Trope DNA */}
           <section className="space-y-4">
-            <h2 className="text-lg font-semibold">🧬 Your Trope DNA</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-semibold">🧬 Your Trope DNA</h2>
+              <Link to="/tropes" className="text-xs font-medium text-primary hover:underline">View all →</Link>
+            </div>
             <div className="flex flex-wrap gap-2">
               {moodProfile.topTropes.map(([trope]) => (
                 <span key={trope} className="rounded-full bg-gold/15 px-3 py-1.5 text-xs text-gold">{trope}</span>
@@ -161,12 +170,15 @@ export default function Profile() {
 
           {/* Recommendations */}
           {recommendations.length > 0 && (
-            <section className="space-y-4">
-              <h2 className="text-lg font-semibold">🎯 Recommended For You</h2>
-              <p className="text-sm text-muted-foreground">Based on your emotional patterns, not just genres</p>
+            <section className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold">🎯 Recommended For You</h2>
+                <Link to="/discover" className="text-xs font-medium text-primary hover:underline">View all →</Link>
+              </div>
+              <p className="text-[13px] text-muted-foreground">Based on your emotional patterns, not just genres</p>
               <div className="no-scrollbar flex gap-4 overflow-x-auto overflow-y-hidden pb-2">
                 {recommendations.map((d) => (
-                  <DramaCard key={d.id} drama={d} />
+                  <DramaCard key={d.id} drama={d} size="sm" className="!w-[180px] !min-w-[180px] !h-[270px]" />
                 ))}
               </div>
             </section>
