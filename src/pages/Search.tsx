@@ -49,7 +49,7 @@ export default function SearchPage() {
         <EmptyState emoji="🔍" title={`No results for "${q}"`} description="Try browsing by trope instead." ctaLabel="Browse tropes" ctaTo="/tropes" />
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {results.map((d) => <DramaCard key={d.id} drama={d} className="!w-full" />)}
+          {results.map((d) => <DramaCard key={d.id} drama={d} size="lg" className="!h-[288px]" />)}
         </div>
       )}
     </div>
