@@ -56,7 +56,7 @@ export default function Tropes() {
             <p className="text-sm text-muted-foreground">No dramas yet.</p>
           ) : (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-              {list.map((d) => <DramaCard key={d.id} drama={d} className="!w-full" />)}
+              {list.map((d) => <DramaCard key={d.id} drama={d} size="lg" className="!h-[288px]" />)}
             </div>
           )}
         </section>
