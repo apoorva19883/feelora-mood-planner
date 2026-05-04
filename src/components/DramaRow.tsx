@@ -14,7 +14,7 @@ export const DramaRow = ({ title, dramas, emptyText }: { title: ReactNode; drama
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-semibold md:text-xl">{title}</h2>
-      <div className="no-scrollbar flex gap-4 overflow-x-auto pb-2">
+      <div className="no-scrollbar flex gap-4 overflow-x-auto overflow-y-hidden pb-2">
         {dramas.map((d) => <DramaCard key={d.id} drama={d} />)}
       </div>
     </section>
