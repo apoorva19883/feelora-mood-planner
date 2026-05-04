@@ -17,7 +17,6 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound.tsx";
 import Discover from "./pages/Discover";
 import Profile from "./pages/Profile";
-import CaseStudy from "./pages/CaseStudy";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +34,6 @@ const App = () => (
               <Route path="/tropes" element={<Tropes />} />
               <Route path="/discover" element={<Discover />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/case-study" element={<CaseStudy />} />
               <Route path="/drama/:id" element={<DramaDetail />} />
               <Route path="/search" element={<Search />} />
               <Route path="/planner" element={<Planner />} />
