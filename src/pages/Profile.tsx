@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { dramas, moods, getBingeHours } from "@/data/dramas";
+import { dramas, moods } from "@/data/dramas";
 import { useAppStore } from "@/store/AppStore";
 import { PageHeader } from "@/components/PageHeader";
 import { DramaCard } from "@/components/DramaCard";
