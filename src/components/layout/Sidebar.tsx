@@ -1,5 +1,5 @@
-import { NavLink, useLocation, Link } from "react-router-dom";
-import { Home, Compass, Sparkles, CalendarDays, Bookmark, Users, Settings, User, FileText } from "lucide-react";
+import { NavLink, useLocation } from "react-router-dom";
+import { Home, Compass, Sparkles, CalendarDays, Bookmark, Users, Settings, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const items = [
@@ -10,7 +10,6 @@ const items = [
   { to: "/planner", label: "Planner", icon: CalendarDays },
   { to: "/watchlist", label: "Watchlist", icon: Bookmark },
   { to: "/community", label: "Community", icon: Users },
-  { to: "/case-study", label: "Case Study", icon: FileText },
   { to: "/settings", label: "Settings", icon: Settings },
 ];
 
