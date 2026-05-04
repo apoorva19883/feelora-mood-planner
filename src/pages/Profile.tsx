@@ -164,17 +164,9 @@ export default function Profile() {
             <section className="space-y-4">
               <h2 className="text-lg font-semibold">🎯 Recommended For You</h2>
               <p className="text-sm text-muted-foreground">Based on your emotional patterns, not just genres</p>
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+              <div className="no-scrollbar flex gap-4 overflow-x-auto overflow-y-hidden pb-2">
                 {recommendations.map((d) => (
-                  <div key={d.id} className="space-y-2">
-                    <DramaCard drama={d} className="!w-full" />
-                    <div className="flex flex-wrap gap-1 px-1">
-                      {d.emotionalJourney.slice(0, 2).map((e) => (
-                        <span key={e} className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[9px]">{e}</span>
-                      ))}
-                      <span className="text-[9px] text-muted-foreground">{getBingeHours(d)}h</span>
-                    </div>
-                  </div>
+                  <DramaCard key={d.id} drama={d} />
                 ))}
               </div>
             </section>
